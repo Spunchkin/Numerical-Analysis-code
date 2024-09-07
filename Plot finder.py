@@ -86,7 +86,7 @@ def poly_regression(x, y):
 
 # Then we can do an exp regression
 def exp_regression(x, y):
-    log_y = np.log(y); X = sm.add_constant(x); model_exp = sm.OLS(log_y, X).fit()
+    log_y = np.log(abs(y)); X = sm.add_constant(x); model_exp = sm.OLS(log_y, X).fit()
     # And then measure how accurate it is
     log_pred = model_exp.predict(X); pred_exp = np.exp(log_pred)
     residuals_exp = y - pred_exp; ExponentialError = np.mean(np.abs(residuals_exp))
@@ -97,7 +97,7 @@ def exp_regression(x, y):
 
 # Log reg
 def logarithmic_regression(x, y):
-    log_x = np.log(x); X = sm.add_constant(log_x); model_log = sm.OLS(y, X).fit()
+    log_x = np.log(abs(x)); X = sm.add_constant(log_x); model_log = sm.OLS(y, X).fit()
     # And then measure how accurate it is
     pred_log = model_log.predict(X); residuals_log = y - pred_log
     LogarithmicError = np.mean(np.abs(residuals_log))
